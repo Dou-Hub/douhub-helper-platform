@@ -10,7 +10,7 @@ import {
     S3_DATA_BUCKET, DYNAMO_DB_PROFILE_TABLE
 } from 'douhub-helper-lambda';
 import { 
-    cosmosDBRetrieve, cosmosDBUpsert, dynamoDBCreate, 
+    cosmosDBRetrieveById, cosmosDBUpsert, dynamoDBCreate, 
     createCognitoUser,
     dynamoDBRetrieve, getSecretValue, 
     s3Exist, s3PutObject } from 'douhub-helper-service';
@@ -131,7 +131,7 @@ export const initPlatform = async (
 
         //Create Organization in CosmosDB
         if (_track) console.log('retrieve organization from cosmosDB.');
-        if (!(await cosmosDBRetrieve(organizationId))) {
+        if (!(await cosmosDBRetrieveById(organizationId))) {
             if (_track) console.log('create organization in cosmosDB.');
             await cosmosDBUpsert(organization);
         }
@@ -159,7 +159,7 @@ export const initPlatform = async (
 
         //Create User in CosmosDB
         if (_track) console.log('retrieve user from cosmosDB.');
-        if (!await cosmosDBRetrieve(userId)) {
+        if (!await cosmosDBRetrieveById(userId)) {
             if (_track) console.log('create user in cosmosDB.');
             await cosmosDBUpsert(user); 
         }
@@ -167,7 +167,7 @@ export const initPlatform = async (
         if (_track) console.log('retrieve user from dynamoDB.', DYNAMO_DB_PROFILE_TABLE);
         //Create User in DynamoDB
         const userIdinDynamoDb = `user.${userId}`;
-        if (!await dynamoDBRetrieve(userIdinDynamoDb, DYNAMO_DB_PROFILE_TABLE)) {
+        if (!await dynamoDBRetrieve (userIdinDynamoDb, DYNAMO_DB_PROFILE_TABLE)) {
             if (_track) console.log('create user in dynamoDB.', DYNAMO_DB_PROFILE_TABLE);
             await dynamoDBCreate({ ...user, id: userIdinDynamoDb }, DYNAMO_DB_PROFILE_TABLE);
         }

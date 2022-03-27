@@ -1,7 +1,7 @@
 {
   "name": "douhub-helper-platform",
   "licence": "MIT",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -18,9 +18,9 @@
     "axios": "^0.24.0",
     "crypto-js": "^4.1.1",
     "douhub-helper-data": "^1.0.4",
-    "douhub-helper-lambda": "^1.0.33",
-    "douhub-helper-service": "^1.0.26",
-    "douhub-helper-util": "^1.0.36",
+    "douhub-helper-lambda": "^1.0.54",
+    "douhub-helper-service": "^1.0.52",
+    "douhub-helper-util": "^1.0.82",
     "lodash": "^4.17.21",
     "rate-limiter-flexible": "^2.3.5",
     "uuid": "^8.3.2"
